@@ -207,11 +207,6 @@ jobs:
             
             **Original Release:** https://github.com/dani-garcia/vaultwarden/releases/tag/${{ needs.check-and-prepare.outputs.release_version }}
             
-            **Usage:**
-            1. Download the `.exe` file
-            2. Place it in your desired directory
-            3. Run `vaultwarden-${{ needs.check-and-prepare.outputs.release_version }}-windows-x64.exe`
-            4. Access via http://localhost:80 (default)
           draft: false
           prerelease: false
           files: ./windows-binary/*
