@@ -30,27 +30,30 @@ This repository contains a GitHub Action that automatically builds and releases 
    @echo off
    chcp 65001
    setlocal enabledelayedexpansion
-
-   :: Set Rocket TLS configuration
-   set ROCKET_TLS={certs="certificate.crt",key="private.key"}
-
-   :: Set server address and port
+   
+   echo 生成证书 生成一次即可
+   echo openssl req -x509 -newkey rsa:2048 -nodes -days 3650 -keyout localhost.key -out localhost.crt -subj "/CN=localhost" -addext "subjectAltName=DNS:localhost,IP:127.0.0.1,IP:192.168.1.130"
+   
+   :: 设置 Rocket TLS 配置 - 移除多余的引号和转义字符
+   set ROCKET_TLS={certs="localhost.crt",key="localhost.key"}
+   
+   :: 设置服务器地址和端口
    set ROCKET_ADDRESS=0.0.0.0
    set ROCKET_PORT=8443
-
-   :: Set domain
-   set DOMAIN=https://192.168.1.110:8443
-
-   :: Display configuration for debugging
-   echo Configuration:
+   
+   :: 设置域名
+   set DOMAIN=https://192.168.1.130:8443
+   
+   :: 显示配置信息以便调试
+   echo 配置信息:
    echo ROCKET_TLS=%ROCKET_TLS%
    echo ROCKET_ADDRESS=%ROCKET_ADDRESS%
    echo ROCKET_PORT=%ROCKET_PORT%
    echo DOMAIN=%DOMAIN%
    echo.
-
-   :: Start Vaultwarden
-   echo Starting Vaultwarden...
+   
+   :: 启动 Vaultwarden
+   echo 正在启动 Vaultwarden...
    vaultwarden.exe
    ```
 5. Run the batch file to start Vaultwarden
@@ -88,17 +91,20 @@ This repository contains a GitHub Action that automatically builds and releases 
    @echo off
    chcp 65001
    setlocal enabledelayedexpansion
-
-   :: 设置 Rocket TLS 配置
-   set ROCKET_TLS={certs="certificate.crt",key="private.key"}
-
+   
+   echo 生成证书 生成一次即可
+   echo openssl req -x509 -newkey rsa:2048 -nodes -days 3650 -keyout localhost.key -out localhost.crt -subj "/CN=localhost" -addext "subjectAltName=DNS:localhost,IP:127.0.0.1,IP:192.168.1.130"
+   
+   :: 设置 Rocket TLS 配置 - 移除多余的引号和转义字符
+   set ROCKET_TLS={certs="localhost.crt",key="localhost.key"}
+   
    :: 设置服务器地址和端口
    set ROCKET_ADDRESS=0.0.0.0
    set ROCKET_PORT=8443
-
+   
    :: 设置域名
-   set DOMAIN=https://192.168.1.110:8443
-
+   set DOMAIN=https://192.168.1.130:8443
+   
    :: 显示配置信息以便调试
    echo 配置信息:
    echo ROCKET_TLS=%ROCKET_TLS%
@@ -106,7 +112,7 @@ This repository contains a GitHub Action that automatically builds and releases 
    echo ROCKET_PORT=%ROCKET_PORT%
    echo DOMAIN=%DOMAIN%
    echo.
-
+   
    :: 启动 Vaultwarden
    echo 正在启动 Vaultwarden...
    vaultwarden.exe
